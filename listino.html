@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sage Studio - Estetica a Firenze</title>
+    <meta
+      name="description"
+      content="Sage Studio: trattamenti estetici con calma, attenzione e professionalità. Prenota su WhatsApp."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Sage Studio, vai alla home"
+        >
+          <span class="brand-mark" aria-hidden="true">✿</span>
+          <span class="brand-name">Sage studio</span>
+        </a>
+
+        <nav class="header-actions" aria-label="Azioni principali">
+          <a class="btn btn-ghost" href="listino.html">Listino</a>
+          <a class="btn btn-primary" href="index.html#prenota">Prenota ora</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="listino">
+      <section class="section listino-header">
+        <div class="container">
+          <h1>Listino prezzi</h1>
+          <p>
+            I trattamenti possono essere personalizzati in base alle tue
+            esigenze. Per informazioni o dubbi, scrivimi senza impegno.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container listino-group">
+          <div class="listino-head">
+            <div class="listino-image">
+              <img src="assets/listino-viso.jpg" alt="Trattamenti viso" />
+            </div>
+          </div>
+          <h2>Trattamenti viso</h2>
+
+          <ul class="price-list">
+            <li>
+              <span>Pulizia viso</span>
+              <span>€50</span>
+            </li>
+            <li>
+              <span>Trattamento idratante</span>
+              <span>€60</span>
+            </li>
+            <li>
+              <span>Trattamento illuminante</span>
+              <span>€65</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-soft">
+        <div class="container listino-group">
+          <div class="listino-head">
+            <div class="listino-image">
+              <img src="assets/listino-corpo.jpg" alt="Trattamenti corpo" />
+            </div>
+          </div>
+          <h2>Trattamenti corpo</h2>
+
+          <ul class="price-list">
+            <li>
+              <span>Massaggio rilassante</span>
+              <span>€60</span>
+            </li>
+            <li>
+              <span>Massaggio drenante</span>
+              <span>€65</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container listino-note">
+          <p>
+            I prezzi indicati sono da considerarsi orientativi. Ogni trattamento
+            può essere personalizzato in base alle esigenze della persona.
+          </p>
+
+          <p>
+            Per informazioni, dubbi o richieste specifiche,
+            <a href="https://wa.me/393330000000">scrivimi su WhatsApp</a>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-info">
+          <p class="footer-brand">Sage Studio di Martina De Santis</p>
+          <p>Via xxx, 10 - 50127 Firenze</p>
+          <p>
+            <a href="mailto:info@sagestudio.it">info@sagestudio.it</a>
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="listino.html">Listino prezzi</a>
+          <a href="#">Privacy</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2026 Sage Studio, tutti i diritti riservati -
+          <small
+            >website by
+            <a href="https://www.codefromatoz.it">codefromatoz.it</a></small
+          >
+        </p>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".fade-up").forEach((el) => {
+      observer.observe(el);
+    });
+  </script>
+</html>
