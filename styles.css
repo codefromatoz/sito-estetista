@@ -753,6 +753,12 @@ a:hover {
   }
 }
 
+@media (max-width: 390px) {
+  .hero-flowers {
+    background-image: url("assets/background-small.png");
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
