@@ -1,245 +1,1294 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sage Studio - Estetica a Firenze</title>
+    <title>Sage Studio — Trattamenti estetici a Firenze</title>
     <meta
       name="description"
-      content="Sage Studio: trattamenti estetici con calma, attenzione e professionalità. Prenota su WhatsApp."
+      content="Sage Studio — trattamenti estetici con calma, attenzione e professionalità. Nel cuore di Firenze."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&family=Open+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
       rel="stylesheet"
     />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: oklch(97.5% 0.012 75);
+        color: oklch(24% 0.02 72);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    <link rel="stylesheet" href="styles.css" />
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.95s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.95s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .d1 {
+        transition-delay: 0.12s;
+      }
+      .d2 {
+        transition-delay: 0.24s;
+      }
+      .d3 {
+        transition-delay: 0.38s;
+      }
+      .d4 {
+        transition-delay: 0.52s;
+      }
+
+      /* ── Nav underline hover ── */
+      .navlink {
+        position: relative;
+        text-decoration: none;
+      }
+      .navlink::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.32s ease;
+      }
+      .navlink:hover::after {
+        width: 100%;
+      }
+
+      /* ── Image zoom on hover ── */
+      .img-wrap {
+        overflow: hidden;
+      }
+      .img-wrap img {
+        transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .img-wrap:hover img {
+        transform: scale(1.04);
+      }
+
+      /* ── Pill button (sage) ── */
+      .btn-pill {
+        transition:
+          background 0.38s ease,
+          transform 0.32s ease,
+          box-shadow 0.38s ease;
+      }
+      .btn-pill:hover {
+        background: oklch(52% 0.1 148) !important;
+        transform: translateY(-3px) !important;
+        box-shadow:
+          0 14px 36px oklch(57% 0.09 148 / 0.36),
+          0 0 0 4px oklch(79% 0.055 16 / 0.28) !important;
+      }
+      .btn-pill:active {
+        transform: translateY(-1px) !important;
+      }
+
+      /* ── Outline rose cipria button ── */
+      .btn-rose-out {
+        transition:
+          background 0.38s ease,
+          color 0.38s ease,
+          border-color 0.38s ease,
+          transform 0.32s ease,
+          box-shadow 0.38s ease;
+      }
+      .btn-rose-out:hover {
+        background: oklch(79% 0.055 16) !important;
+        border-color: oklch(79% 0.055 16) !important;
+        color: #fff !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 12px 32px oklch(79% 0.055 16 / 0.38) !important;
+      }
+      .btn-rose-out:active {
+        transform: translateY(-1px) !important;
+      }
+
+      /* ── Service card hover ── */
+      .service-card {
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+      }
+      .service-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 18px 44px rgba(90, 115, 90, 0.13) !important;
+      }
+
+      /* ── WhatsApp button ── */
+      .btn-wa {
+        transition:
+          background 0.3s ease,
+          transform 0.25s ease;
+      }
+      .btn-wa:hover {
+        background: #1da851 !important;
+        transform: translateY(-2px);
+      }
+
+      /* ── Email link ── */
+      .btn-email {
+        transition:
+          border-color 0.3s ease,
+          color 0.3s ease;
+      }
+      .btn-email:hover {
+        border-color: oklch(57% 0.09 148) !important;
+        color: oklch(75% 0.04 148) !important;
+      }
+
+      /* ── Footer links ── */
+      .footer-link {
+        transition: color 0.2s ease;
+      }
+      .footer-link:hover {
+        color: oklch(70% 0.02 148) !important;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 800px) {
+        .col2 {
+          grid-template-columns: 1fr !important;
+        }
+        .col3 {
+          grid-template-columns: 1fr !important;
+        }
+        .col2-rev > :first-child {
+          order: 0 !important;
+        }
+        .hero-h1 {
+          font-size: 52px !important;
+        }
+        .section-pad {
+          padding: 72px 24px !important;
+        }
+        .nav-inner {
+          padding: 16px 24px !important;
+        }
+        .nav-cta-text {
+          display: none !important;
+        }
+        .footer-inner {
+          padding: 22px 24px !important;
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Header -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="Sage Studio, vai alla home">
-          <img
-            src="assets/logo-sage-studio.png"
-            alt="Sage Studio"
-            class="brand-logo"
-          />
-        </a>
-
-        <nav class="header-actions" aria-label="Azioni principali">
-          <a href="listino.html" class="header-link">Listino</a>
-          <a class="btn btn-primary" href="#prenota">Prenota ora</a>
-        </nav>
-      </div>
-    </header>
-
-    <main id="top">
-      <section class="hero">
-        <!-- BLOCCO VISIVO -->
-        <div class="hero-visual">
-          <div class="hero-image">
-            <span class="hero-blob" aria-hidden="true"></span>
-            <img src="assets/hero.jpg" alt="Trattamento viso relax" />
-          </div>
-        </div>
-
-        <!-- BLOCCO TESTO -->
-        <div class="hero-content fade-up">
-          <span class="hero-flowers" aria-hidden="true"></span>
-
-          <div class="hero-text">
-            <h1>
-              Uno spazio dedicato alla cura della persona, al relax e al
-              benessere.
-            </h1>
-            <p>
-              Trattamenti estetici pensati per prendersi cura di sé con calma,
-              attenzione e professionalità.
-            </p>
-            <a href="#prenota" class="btn btn-primary btn-lg"
-              >Prenota un appuntamento</a
+    <div style="min-height: 100vh; background: oklch(97.5% 0.012 75)">
+      <!-- ── NAV ── -->
+      <nav
+        id="main-nav"
+        style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 200;
+          transition:
+            background 0.45s ease,
+            box-shadow 0.45s ease;
+        "
+      >
+        <div
+          class="nav-inner"
+          style="
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+          "
+        >
+          <a href="#top" style="line-height: 0; flex-shrink: 0">
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/logo-sage-studio.png"
+              alt="Sage Studio"
+              style="height: 34px; width: auto; object-fit: contain"
+            />
+          </a>
+          <div style="display: flex; align-items: center; gap: 40px">
+            <a
+              href="listino.html"
+              class="navlink"
+              style="
+                color: oklch(26% 0.02 72);
+                font-size: 12.5px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                font-weight: 400;
+              "
             >
-          </div>
-        </div>
-      </section>
-
-      <section class="treatments-intro fade-up">
-        <div class="treatments-list">
-          <div class="treatment-item">
-            <img src="assets/ico-viso.svg" alt="" aria-hidden="true" />
-            <h3>Trattamenti viso</h3>
-          </div>
-
-          <div class="treatment-item">
-            <img src="assets/ico-corpo.svg" alt="" aria-hidden="true" />
-            <h3>Trattamenti corpo</h3>
-          </div>
-
-          <div class="treatment-item">
-            <img src="assets/ico-mani.svg" alt="" aria-hidden="true" />
-            <h3>Manicure e pedicure</h3>
-          </div>
-        </div>
-      </section>
-
-      <!-- Chi sono -->
-      <section class="section">
-        <div class="container split fade-up">
-          <div class="split-text">
-            <p>
-              Mi chiamo Martina e sono un’estetista qualificata. Ho creato Sage
-              Studio per offrire un luogo intimo e accogliente, dove ogni
-              trattamento è pensato come un momento di pausa e ascolto.
-            </p>
-            <p>
-              Credo in un’estetica gentile, rispettosa della pelle e dei tempi
-              di ogni persona. Lavoro con attenzione, utilizzando prodotti
-              selezionati e tecniche non invasive, per valorizzare la bellezza
-              naturale senza forzature.
-            </p>
-          </div>
-
-          <div class="split-media">
-            <div class="about-image">
-              <span class="about-blob" aria-hidden="true"></span>
-              <img src="assets/chi-sono.jpg" alt="Lo studio e l’atmosfera" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container split split-approach fade-up">
-          <!-- TESTO -->
-          <div class="split-text">
-            <p>
-              Ogni trattamento inizia con un momento di ascolto. Credo che la
-              cura estetica non debba essere frettolosa, ma un gesto consapevole
-              e personalizzato.
-            </p>
-
-            <p>
-              Il mio obiettivo è farti sentire a tuo agio, seguita e rilassata,
-              in un ambiente tranquillo e riservato.
-            </p>
-          </div>
-          <!-- IMMAGINE -->
-          <div class="split-media">
-            <div class="approach-image">
-              <span class="approach-blob" aria-hidden="true"></span>
-              <img
-                src="assets/approccio.jpg"
-                alt="Prodotti e strumenti selezionati"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-soft treatments-section">
-        <div class="container split split-treatments fade-up">
-          <div class="split-text">
-            <p>
-              Nel mio studio trovi una selezione di trattamenti pensati per il
-              viso e il corpo, studiati per rilassare, riequilibrare e prendersi
-              cura della pelle.
-            </p>
-
-            <p>
-              Ogni trattamento può essere personalizzato in base alle tue
-              esigenze.
-            </p>
-
-            <a href="listino.html" class="btn btn-primary">
-              Vedi il listino prezzi
+              Listino
+            </a>
+            <a
+              href="#prenota"
+              class="btn-pill"
+              style="
+                display: inline-block;
+                text-decoration: none;
+                background: oklch(57% 0.09 148);
+                color: #fff;
+                padding: 10px 26px;
+                border-radius: 40px;
+                font-size: 12px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-weight: 400;
+              "
+            >
+              <span class="nav-cta-text">Prenota ora</span>
             </a>
           </div>
+        </div>
+      </nav>
 
-          <div class="split-media">
+      <!-- ── HERO ── -->
+      <section
+        id="top"
+        style="
+          position: relative;
+          min-height: 100svh;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+        "
+      >
+        <!-- Foto di sfondo (specchiata) -->
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            background-image: url(&quot;https://codefromatoz.github.io/sito-estetista/assets/hero.jpg&quot;);
+            background-size: cover;
+            background-position: center center;
+            transform: scaleX(-1);
+          "
+        ></div>
+        <!-- Overlay: cream forte a sinistra, trasparente a destra -->
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              108deg,
+              oklch(97.5% 0.012 75 / 0.98) 0%,
+              oklch(97.5% 0.012 75 / 0.94) 30%,
+              oklch(97.5% 0.012 75 / 0.58) 56%,
+              oklch(97.5% 0.012 75 / 0.08) 80%
+            );
+          "
+        ></div>
+        <!-- Vignetta in basso -->
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              to top,
+              oklch(97.5% 0.012 75 / 0.5) 0%,
+              transparent 38%
+            );
+          "
+        ></div>
+
+        <!-- Contenuto -->
+        <div
+          style="
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 150px 48px 120px;
+          "
+        >
+          <div style="max-width: 610px">
+            <!-- Eyebrow con linea decorativa sage→cipria -->
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                margin-bottom: 32px;
+                animation: fadeUp 0.8s ease 0.2s both;
+              "
+            >
+              <div
+                style="
+                  width: 46px;
+                  height: 1px;
+                  background: linear-gradient(
+                    to right,
+                    oklch(57% 0.09 148),
+                    oklch(79% 0.055 16)
+                  );
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 10.5px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: oklch(46% 0.02 72);
+                  font-weight: 400;
+                "
+                >Sage Studio · Firenze</span
+              >
+            </div>
+
+            <!-- Heading -->
+            <h1
+              class="hero-h1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 88px;
+                line-height: 1.04;
+                color: oklch(15% 0.025 72);
+                margin-bottom: 34px;
+                text-wrap: pretty;
+                animation: fadeUp 1s ease 0.42s both;
+              "
+            >
+              Uno spazio<br />dedicato<br />alla cura di sé.
+            </h1>
+
+            <!-- Sottotitolo -->
+            <p
+              style="
+                font-size: 17px;
+                color: oklch(32% 0.02 72);
+                max-width: 380px;
+                line-height: 1.92;
+                font-weight: 300;
+                margin-bottom: 52px;
+                animation: fadeUp 1s ease 0.64s both;
+              "
+            >
+              Trattamenti estetici con calma, attenzione e professionalità. Nel
+              cuore di Firenze.
+            </p>
+
+            <!-- CTA duo -->
+            <div
+              style="
+                display: flex;
+                gap: 14px;
+                flex-wrap: wrap;
+                align-items: center;
+                animation: fadeUp 1s ease 0.86s both;
+              "
+            >
+              <a
+                href="#prenota"
+                class="btn-pill"
+                style="
+                  display: inline-block;
+                  text-decoration: none;
+                  background: oklch(57% 0.09 148);
+                  color: #fff;
+                  padding: 16px 40px;
+                  border-radius: 40px;
+                  font-size: 13px;
+                  letter-spacing: 0.13em;
+                  text-transform: uppercase;
+                  font-weight: 400;
+                "
+              >
+                Prenota ora
+              </a>
+              <a
+                href="listino.html"
+                class="btn-rose-out"
+                style="
+                  display: inline-block;
+                  text-decoration: none;
+                  border: 1.5px solid oklch(79% 0.055 16);
+                  color: oklch(52% 0.065 16);
+                  padding: 16px 36px;
+                  border-radius: 40px;
+                  font-size: 13px;
+                  letter-spacing: 0.13em;
+                  text-transform: uppercase;
+                  font-weight: 400;
+                "
+              >
+                Scopri i trattamenti
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Indicatore di scroll -->
+        <div
+          style="
+            position: absolute;
+            bottom: 40px;
+            left: 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            animation: fadeIn 1.6s ease 1.5s both;
+          "
+        >
+          <div
+            style="
+              width: 46px;
+              height: 1px;
+              background: linear-gradient(
+                to right,
+                oklch(57% 0.09 148),
+                oklch(79% 0.055 16)
+              );
+            "
+          ></div>
+          <span
+            style="
+              font-size: 10px;
+              letter-spacing: 0.26em;
+              text-transform: uppercase;
+              color: oklch(46% 0.02 72);
+            "
+            >Scorri</span
+          >
+        </div>
+      </section>
+
+      <!-- ── SERVIZI ── -->
+      <section
+        class="section-pad"
+        style="padding: 110px 48px; background: oklch(95.5% 0.016 80)"
+      >
+        <div style="max-width: 1100px; margin: 0 auto">
+          <p
+            class="reveal"
+            style="
+              text-align: center;
+              font-size: 11px;
+              letter-spacing: 0.22em;
+              text-transform: uppercase;
+              color: oklch(57% 0.09 148);
+              margin-bottom: 14px;
+              font-weight: 400;
+            "
+          >
+            I nostri servizi
+          </p>
+          <h2
+            class="reveal d1"
+            style="
+              text-align: center;
+              font-family: &quot;Cormorant Garant&quot;, serif;
+              font-style: italic;
+              font-weight: 300;
+              font-size: 46px;
+              color: oklch(20% 0.02 72);
+              margin-bottom: 68px;
+              line-height: 1.2;
+            "
+          >
+            Prendersi cura, con attenzione.
+          </h2>
+          <div
+            class="col3"
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 28px;
+            "
+          >
+            <!-- Trattamenti viso -->
+            <div
+              class="reveal d1 service-card"
+              style="
+                background: #fff;
+                border-radius: 22px;
+                padding: 46px 34px;
+                text-align: center;
+                box-shadow: 0 4px 28px rgba(100, 120, 100, 0.07);
+              "
+            >
+              <div
+                style="
+                  width: 72px;
+                  height: 72px;
+                  border-radius: 50%;
+                  background: oklch(92.5% 0.04 148);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 26px;
+                  color: oklch(42% 0.1 148);
+                "
+              >
+                <svg
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="width: 30px; height: 30px"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-width="1.2"
+                    d="M24 41 C14 32 10 22 10 16 C10 9 17 5 24 5 C31 5 38 9 38 16 C38 22 34 32 24 41Z"
+                  />
+                  <path stroke-width="0.8" d="M24 7 L24 39" />
+                  <path stroke-width="1" d="M24 20 Q30.5 16.5 35 18.5" />
+                  <path stroke-width="0.9" d="M24 28 Q19 25 15 27" />
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-family: &quot;Cormorant Garant&quot;, serif;
+                  font-size: 25px;
+                  font-weight: 400;
+                  color: oklch(20% 0.02 72);
+                  margin-bottom: 12px;
+                "
+              >
+                Trattamenti viso
+              </h3>
+              <p
+                style="
+                  font-size: 14.5px;
+                  color: oklch(52% 0.02 72);
+                  line-height: 1.85;
+                  font-weight: 300;
+                "
+              >
+                Pulizie, idratazione, illuminazione. Ogni trattamento è pensato
+                per la tua pelle.
+              </p>
+            </div>
+
+            <!-- Trattamenti corpo -->
+            <div
+              class="reveal d2 service-card"
+              style="
+                background: #fff;
+                border-radius: 22px;
+                padding: 46px 34px;
+                text-align: center;
+                box-shadow: 0 4px 28px rgba(100, 120, 100, 0.07);
+              "
+            >
+              <div
+                style="
+                  width: 72px;
+                  height: 72px;
+                  border-radius: 50%;
+                  background: oklch(94% 0.035 16);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 26px;
+                  color: oklch(50% 0.075 16);
+                "
+              >
+                <svg
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  style="width: 34px; height: 34px"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-width="1.3"
+                    d="M8 17 C12 13 16 13 20 16 C24 19 28 19 32 16 C35.5 14 37.5 14 40 16"
+                  />
+                  <path
+                    stroke-width="1.3"
+                    d="M8 24 C12 20 16 20 20 23 C24 26 28 26 32 23 C35.5 21 37.5 21 40 23"
+                  />
+                  <path
+                    stroke-width="1.3"
+                    d="M8 31 C12 27 16 27 20 30 C24 33 28 33 32 30 C35.5 28 37.5 28 40 30"
+                  />
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-family: &quot;Cormorant Garant&quot;, serif;
+                  font-size: 25px;
+                  font-weight: 400;
+                  color: oklch(20% 0.02 72);
+                  margin-bottom: 12px;
+                "
+              >
+                Trattamenti corpo
+              </h3>
+              <p
+                style="
+                  font-size: 14.5px;
+                  color: oklch(52% 0.02 72);
+                  line-height: 1.85;
+                  font-weight: 300;
+                "
+              >
+                Massaggi rilassanti e drenanti per ritrovare equilibrio e
+                benessere del corpo.
+              </p>
+            </div>
+
+            <!-- Manicure e pedicure -->
+            <div
+              class="reveal d3 service-card"
+              style="
+                background: #fff;
+                border-radius: 22px;
+                padding: 46px 34px;
+                text-align: center;
+                box-shadow: 0 4px 28px rgba(100, 120, 100, 0.07);
+              "
+            >
+              <div
+                style="
+                  width: 72px;
+                  height: 72px;
+                  border-radius: 50%;
+                  background: oklch(92.5% 0.04 148);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 26px;
+                  color: oklch(42% 0.1 148);
+                "
+              >
+                <svg
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="width: 30px; height: 30px"
+                  aria-hidden="true"
+                >
+                  <g transform="translate(24,24)">
+                    <ellipse
+                      cx="0"
+                      cy="-10"
+                      rx="3.5"
+                      ry="7"
+                      stroke-width="1.1"
+                    />
+                    <ellipse
+                      cx="0"
+                      cy="-10"
+                      rx="3.5"
+                      ry="7"
+                      stroke-width="1.1"
+                      transform="rotate(72)"
+                    />
+                    <ellipse
+                      cx="0"
+                      cy="-10"
+                      rx="3.5"
+                      ry="7"
+                      stroke-width="1.1"
+                      transform="rotate(144)"
+                    />
+                    <ellipse
+                      cx="0"
+                      cy="-10"
+                      rx="3.5"
+                      ry="7"
+                      stroke-width="1.1"
+                      transform="rotate(216)"
+                    />
+                    <ellipse
+                      cx="0"
+                      cy="-10"
+                      rx="3.5"
+                      ry="7"
+                      stroke-width="1.1"
+                      transform="rotate(288)"
+                    />
+                    <circle cx="0" cy="0" r="2.5" stroke-width="1.1" />
+                  </g>
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-family: &quot;Cormorant Garant&quot;, serif;
+                  font-size: 25px;
+                  font-weight: 400;
+                  color: oklch(20% 0.02 72);
+                  margin-bottom: 12px;
+                "
+              >
+                Manicure e pedicure
+              </h3>
+              <p
+                style="
+                  font-size: 14.5px;
+                  color: oklch(52% 0.02 72);
+                  line-height: 1.85;
+                  font-weight: 300;
+                "
+              >
+                Cura delle mani e dei piedi con attenzione ai dettagli e
+                prodotti selezionati.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CHI SONO ── -->
+      <section class="section-pad" style="padding: 120px 48px">
+        <div
+          class="col2"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 88px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+          "
+        >
+          <div>
+            <p
+              class="reveal"
+              style="
+                font-size: 11px;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: oklch(57% 0.09 148);
+                margin-bottom: 18px;
+                font-weight: 400;
+              "
+            >
+              Chi sono
+            </p>
+            <h2
+              class="reveal d1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 44px;
+                line-height: 1.2;
+                color: oklch(20% 0.02 72);
+                margin-bottom: 30px;
+                text-wrap: pretty;
+              "
+            >
+              Un luogo intimo dove ogni trattamento è un momento di pausa.
+            </h2>
+            <div class="reveal d2">
+              <p
+                style="
+                  font-size: 15px;
+                  color: oklch(45% 0.02 72);
+                  line-height: 1.95;
+                  font-weight: 300;
+                  margin-bottom: 18px;
+                "
+              >
+                Mi chiamo Martina e sono un'estetista qualificata. Ho creato
+                Sage Studio per offrire un luogo intimo e accogliente, dove ogni
+                trattamento è pensato come un momento di pausa e ascolto.
+              </p>
+              <p
+                style="
+                  font-size: 15px;
+                  color: oklch(45% 0.02 72);
+                  line-height: 1.95;
+                  font-weight: 300;
+                "
+              >
+                Credo in un'estetica gentile, rispettosa della pelle e dei tempi
+                di ogni persona. Lavoro con attenzione, utilizzando prodotti
+                selezionati e tecniche non invasive per valorizzare la bellezza
+                naturale.
+              </p>
+            </div>
+          </div>
+          <div
+            class="reveal d1 img-wrap"
+            style="
+              border-radius: 26px;
+              aspect-ratio: 4/5;
+              overflow: hidden;
+              box-shadow: 0 16px 56px rgba(80, 100, 80, 0.1);
+            "
+          >
             <img
-              src="assets/trattamenti.jpg"
-              alt="Ambiente e trattamenti dello studio"
+              src="https://codefromatoz.github.io/sito-estetista/assets/chi-sono.jpg"
+              alt="Martina — Sage Studio"
+              style="width: 100%; height: 100%; object-fit: cover"
             />
           </div>
         </div>
       </section>
 
-      <section class="contact-section" id="prenota">
-        <div class="container contact-box fade-up">
-          <h2>Contattami</h2>
+      <!-- ── APPROCCIO ── -->
+      <section
+        class="section-pad"
+        style="padding: 120px 48px; background: oklch(94% 0.022 148 / 0.22)"
+      >
+        <div
+          class="col2 col2-rev"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 88px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+          "
+        >
+          <div
+            class="reveal img-wrap"
+            style="
+              border-radius: 26px;
+              aspect-ratio: 4/5;
+              overflow: hidden;
+              box-shadow: 0 16px 56px rgba(80, 100, 80, 0.1);
+              order: -1;
+            "
+          >
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/approccio.jpg"
+              alt="Il mio approccio"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+          <div>
+            <p
+              class="reveal"
+              style="
+                font-size: 11px;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: oklch(57% 0.09 148);
+                margin-bottom: 18px;
+                font-weight: 400;
+              "
+            >
+              Il mio approccio
+            </p>
+            <h2
+              class="reveal d1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 44px;
+                line-height: 1.2;
+                color: oklch(20% 0.02 72);
+                margin-bottom: 30px;
+                text-wrap: pretty;
+              "
+            >
+              Ogni trattamento inizia con un momento di ascolto.
+            </h2>
+            <div class="reveal d2">
+              <p
+                style="
+                  font-size: 15px;
+                  color: oklch(45% 0.02 72);
+                  line-height: 1.95;
+                  font-weight: 300;
+                  margin-bottom: 18px;
+                "
+              >
+                Credo che la cura estetica non debba essere frettolosa, ma un
+                gesto consapevole e personalizzato in base alle esigenze di chi
+                ho davanti.
+              </p>
+              <p
+                style="
+                  font-size: 15px;
+                  color: oklch(45% 0.02 72);
+                  line-height: 1.95;
+                  font-weight: 300;
+                "
+              >
+                Il mio obiettivo è farti sentire a tuo agio, seguita e
+                rilassata, in un ambiente tranquillo e riservato.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <p>
-            Scrivimi per informazioni, disponibilità o per capire insieme quale
-            trattamento è più adatto a te.
+      <!-- ── TRATTAMENTI ── -->
+      <section class="section-pad" style="padding: 120px 48px">
+        <div
+          class="col2"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 88px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+          "
+        >
+          <div>
+            <p
+              class="reveal"
+              style="
+                font-size: 11px;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: oklch(57% 0.09 148);
+                margin-bottom: 18px;
+                font-weight: 400;
+              "
+            >
+              I trattamenti
+            </p>
+            <h2
+              class="reveal d1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 44px;
+                line-height: 1.2;
+                color: oklch(20% 0.02 72);
+                margin-bottom: 28px;
+                text-wrap: pretty;
+              "
+            >
+              Una selezione pensata per viso e corpo.
+            </h2>
+            <p
+              class="reveal d2"
+              style="
+                font-size: 15px;
+                color: oklch(45% 0.02 72);
+                line-height: 1.95;
+                font-weight: 300;
+                margin-bottom: 38px;
+              "
+            >
+              Nel mio studio trovi una selezione di trattamenti per rilassare,
+              riequilibrare e prendersi cura della pelle. Ogni trattamento può
+              essere personalizzato in base alle tue esigenze.
+            </p>
+            <div class="reveal d3">
+              <a
+                href="listino.html"
+                class="btn-rose-out"
+                style="
+                  display: inline-block;
+                  text-decoration: none;
+                  border: 1.5px solid oklch(79% 0.055 16);
+                  color: oklch(52% 0.065 16);
+                  padding: 13px 32px;
+                  border-radius: 40px;
+                  font-size: 13px;
+                  letter-spacing: 0.12em;
+                  text-transform: uppercase;
+                  font-weight: 400;
+                "
+              >
+                Vedi il listino prezzi
+              </a>
+            </div>
+          </div>
+          <div
+            class="reveal d1 img-wrap"
+            style="
+              border-radius: 26px;
+              aspect-ratio: 3/4;
+              overflow: hidden;
+              box-shadow: 0 16px 56px rgba(80, 100, 80, 0.1);
+            "
+          >
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/trattamenti.jpg"
+              alt="Trattamenti Sage Studio"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CONTATTO / PRENOTA ── -->
+      <section
+        id="prenota"
+        class="section-pad"
+        style="padding: 120px 48px; background: oklch(23% 0.025 72)"
+      >
+        <div style="max-width: 640px; margin: 0 auto; text-align: center">
+          <p
+            class="reveal"
+            style="
+              font-size: 11px;
+              letter-spacing: 0.22em;
+              text-transform: uppercase;
+              color: oklch(57% 0.09 148);
+              margin-bottom: 18px;
+              font-weight: 400;
+            "
+          >
+            Prenota
           </p>
-
-          <div class="contact-actions">
+          <h2
+            class="reveal d1"
+            style="
+              font-family: &quot;Cormorant Garant&quot;, serif;
+              font-style: italic;
+              font-weight: 300;
+              font-size: 50px;
+              line-height: 1.15;
+              color: oklch(95% 0.01 78);
+              margin-bottom: 22px;
+              text-wrap: pretty;
+            "
+          >
+            Scrivimi per informazioni o per prenotare.
+          </h2>
+          <p
+            class="reveal d2"
+            style="
+              font-size: 15.5px;
+              color: oklch(68% 0.01 75);
+              line-height: 1.85;
+              font-weight: 300;
+              margin-bottom: 52px;
+            "
+          >
+            Sono disponibile su WhatsApp per qualsiasi informazione, per capire
+            insieme quale trattamento è più adatto a te o per fissare un
+            appuntamento.
+          </p>
+          <div
+            class="reveal d3"
+            style="
+              display: flex;
+              gap: 14px;
+              justify-content: center;
+              flex-wrap: wrap;
+              margin-bottom: 68px;
+            "
+          >
             <a
               href="https://wa.me/393330000000"
-              class="btn btn-primary"
-              target="_blank"
-              rel="noopener"
+              class="btn-wa"
+              style="
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: #25d366;
+                color: #fff;
+                text-decoration: none;
+                padding: 14px 30px;
+                border-radius: 40px;
+                font-size: 14px;
+                font-weight: 400;
+                letter-spacing: 0.04em;
+              "
             >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                />
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L0 24l6.342-1.508A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894c-1.89 0-3.659-.515-5.177-1.41l-.37-.22-3.768.896.908-3.68-.24-.384A9.877 9.877 0 012.105 12C2.105 6.575 6.575 2.106 12 2.106c5.424 0 9.895 4.47 9.895 9.894 0 5.424-4.47 9.894-9.895 9.894z"
+                />
+              </svg>
               Scrivimi su WhatsApp
             </a>
-
-            <p class="contact-note">
-              Oppure chiama:
-              <a href="tel:+393330000000">333 0000000</a>
+            <a
+              href="mailto:info@sagestudio.it"
+              class="btn-email"
+              style="
+                display: inline-flex;
+                align-items: center;
+                border: 1.5px solid oklch(42% 0.015 72);
+                color: oklch(75% 0.01 75);
+                text-decoration: none;
+                padding: 14px 30px;
+                border-radius: 40px;
+                font-size: 14px;
+                font-weight: 300;
+                letter-spacing: 0.04em;
+              "
+            >
+              info@sagestudio.it
+            </a>
+          </div>
+          <div
+            class="reveal d4"
+            style="padding-top: 48px; border-top: 1px solid oklch(33% 0.02 72)"
+          >
+            <p
+              style="
+                font-size: 14px;
+                color: oklch(55% 0.01 75);
+                line-height: 2.1;
+                font-weight: 300;
+              "
+            >
+              Sage Studio di Martina De Santis<br />
+              Viale Corsica, 10 — 50127 Firenze
             </p>
           </div>
         </div>
       </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-info">
-          <p class="footer-brand">Sage Studio di Martina De Santis</p>
-          <p>Via xxx, 10 - 50127 Firenze</p>
-          <p>
-            <a href="mailto:info@sagestudio.it">info@sagestudio.it</a>
-          </p>
-        </div>
-
-        <div class="footer-links">
-          <a href="listino.html">Listino prezzi</a>
-          <a href="#">Privacy</a>
-          <a href="#" aria-label="Instagram">Instagram</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>
-          © 2026 Sage Studio, tutti i diritti riservati -
-          <small
-            >website by
-            <a href="https://www.codefromatoz.it">codefromatoz.it</a></small
-          >
+      <!-- ── FOOTER ── -->
+      <footer
+        class="footer-inner"
+        style="
+          padding: 26px 48px;
+          background: oklch(18% 0.02 72);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          flex-wrap: wrap;
+        "
+      >
+        <p
+          style="
+            font-size: 12px;
+            color: oklch(44% 0.01 72);
+            letter-spacing: 0.04em;
+            font-weight: 300;
+          "
+        >
+          © 2026 Sage Studio — tutti i diritti riservati
         </p>
-      </div>
-    </footer>
+        <div style="display: flex; gap: 28px; align-items: center">
+          <a
+            href="listino.html"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Listino</a
+          >
+          <a
+            href="#"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Privacy</a
+          >
+          <a
+            href="#"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Instagram</a
+          >
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // ── Nav scroll effect ──
+      const nav = document.getElementById("main-nav");
+      function applyNavStyle() {
+        const scrolled = window.scrollY > 70;
+        nav.style.background = scrolled
+          ? "oklch(97.5% 0.012 75 / 0.96)"
+          : "transparent";
+        nav.style.backdropFilter = scrolled ? "blur(18px)" : "none";
+        nav.style.webkitBackdropFilter = scrolled ? "blur(18px)" : "none";
+        nav.style.boxShadow = scrolled ? "0 1px 28px rgba(0,0,0,0.07)" : "none";
+        const inner = nav.querySelector(".nav-inner");
+        if (inner) {
+          inner.style.paddingTop = scrolled ? "14px" : "22px";
+          inner.style.paddingBottom = scrolled ? "14px" : "22px";
+        }
+      }
+      applyNavStyle();
+      window.addEventListener("scroll", applyNavStyle, { passive: true });
+
+      // ── Scroll reveal ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -48px 0px" },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
   </body>
-
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    document.querySelectorAll(".fade-up").forEach((el) => {
-      observer.observe(el);
-    });
-  </script>
 </html>

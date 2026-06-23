@@ -1,159 +1,909 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sage Studio - Estetica a Firenze</title>
+    <title>Listino prezzi — Sage Studio</title>
     <meta
       name="description"
-      content="Sage Studio: trattamenti estetici con calma, attenzione e professionalità. Prenota su WhatsApp."
+      content="Trattamenti viso e corpo di Sage Studio. Scopri i prezzi e prenota il tuo trattamento."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&family=Open+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
       rel="stylesheet"
     />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: oklch(97.5% 0.012 75);
+        color: oklch(24% 0.02 72);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    <link rel="stylesheet" href="styles.css" />
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .d1 {
+        transition-delay: 0.12s;
+      }
+      .d2 {
+        transition-delay: 0.26s;
+      }
+      .d3 {
+        transition-delay: 0.4s;
+      }
+
+      /* ── Nav underline hover ── */
+      .navlink {
+        position: relative;
+        text-decoration: none;
+      }
+      .navlink::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.32s ease;
+      }
+      .navlink:hover::after {
+        width: 100%;
+      }
+
+      /* ── Image zoom on hover ── */
+      .img-wrap {
+        overflow: hidden;
+      }
+      .img-wrap img {
+        transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .img-wrap:hover img {
+        transform: scale(1.04);
+      }
+
+      /* ── Price row hover ── */
+      .price-row {
+        transition: background 0.25s ease;
+        border-radius: 8px;
+      }
+      .price-row:hover {
+        background: oklch(94% 0.022 148 / 0.25);
+      }
+
+      /* ── Pill button (sage) ── */
+      .btn-pill {
+        transition:
+          background 0.38s ease,
+          transform 0.32s ease,
+          box-shadow 0.38s ease;
+      }
+      .btn-pill:hover {
+        background: oklch(52% 0.1 148) !important;
+        transform: translateY(-3px) !important;
+        box-shadow:
+          0 14px 36px oklch(57% 0.09 148 / 0.36),
+          0 0 0 4px oklch(79% 0.055 16 / 0.25) !important;
+      }
+      .btn-pill:active {
+        transform: translateY(-1px) !important;
+      }
+
+      /* ── Outline rose cipria button ── */
+      .btn-rose-out {
+        transition:
+          background 0.38s ease,
+          color 0.38s ease,
+          border-color 0.38s ease,
+          transform 0.32s ease,
+          box-shadow 0.38s ease;
+      }
+      .btn-rose-out:hover {
+        background: oklch(79% 0.055 16) !important;
+        border-color: oklch(79% 0.055 16) !important;
+        color: #fff !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 12px 32px oklch(79% 0.055 16 / 0.38) !important;
+      }
+      .btn-rose-out:active {
+        transform: translateY(-1px) !important;
+      }
+
+      /* ── WhatsApp button ── */
+      .btn-wa {
+        transition:
+          background 0.3s ease,
+          transform 0.25s ease;
+      }
+      .btn-wa:hover {
+        background: #1da851 !important;
+        transform: translateY(-2px);
+      }
+
+      /* ── Footer links ── */
+      .footer-link {
+        transition: color 0.2s ease;
+      }
+      .footer-link:hover {
+        color: oklch(70% 0.02 148) !important;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 800px) {
+        .col2 {
+          grid-template-columns: 1fr !important;
+        }
+        .col2 .order-first {
+          order: -1 !important;
+        }
+        .listino-hero h1 {
+          font-size: 52px !important;
+        }
+        .section-pad {
+          padding: 72px 24px !important;
+        }
+        .nav-inner {
+          padding: 16px 24px !important;
+        }
+        .hero-section {
+          padding: 140px 24px 80px !important;
+        }
+        .nota-box {
+          padding: 32px 28px !important;
+        }
+        .footer-inner {
+          padding: 22px 24px !important;
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Header -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="Sage Studio, vai alla home">
-          <img
-            src="assets/logo-sage-studio.png"
-            alt="Sage Studio"
-            class="brand-logo"
-          />
-        </a>
-
-        <nav class="header-actions" aria-label="Azioni principali">
-          <a href="listino.html" class="header-link">Listino</a>
-          <a class="btn btn-primary" href="index.html#prenota">Prenota ora</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="listino">
-      <section class="section listino-header">
-        <div class="container">
-          <h1>Listino prezzi</h1>
-          <p>
-            I trattamenti possono essere personalizzati in base alle tue
-            esigenze. Per informazioni o dubbi, scrivimi senza impegno.
-          </p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container listino-group">
-          <div class="listino-head">
-            <div class="listino-image">
-              <img src="assets/listino-viso.jpg" alt="Trattamenti viso" />
-            </div>
+    <div style="min-height: 100vh; background: oklch(97.5% 0.012 75)">
+      <!-- ── NAV ── -->
+      <nav
+        id="main-nav"
+        style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 200;
+          transition:
+            background 0.45s ease,
+            box-shadow 0.45s ease;
+        "
+      >
+        <div
+          class="nav-inner"
+          style="
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+          "
+        >
+          <a href="index.html" style="line-height: 0; flex-shrink: 0">
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/logo-sage-studio.png"
+              alt="Sage Studio"
+              style="height: 34px; width: auto; object-fit: contain"
+            />
+          </a>
+          <div style="display: flex; align-items: center; gap: 40px">
+            <a
+              href="index.html"
+              class="navlink"
+              style="
+                color: oklch(26% 0.02 72);
+                font-size: 12.5px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                font-weight: 400;
+              "
+            >
+              Home
+            </a>
+            <a
+              href="index.html#prenota"
+              class="btn-pill"
+              style="
+                display: inline-block;
+                text-decoration: none;
+                background: oklch(57% 0.09 148);
+                color: #fff;
+                padding: 10px 26px;
+                border-radius: 40px;
+                font-size: 12px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-weight: 400;
+              "
+            >
+              Prenota ora
+            </a>
           </div>
-          <h2>Trattamenti viso</h2>
-
-          <ul class="price-list">
-            <li>
-              <span>Pulizia viso</span>
-              <span>€50</span>
-            </li>
-            <li>
-              <span>Trattamento idratante</span>
-              <span>€60</span>
-            </li>
-            <li>
-              <span>Trattamento illuminante</span>
-              <span>€65</span>
-            </li>
-          </ul>
         </div>
-      </section>
+      </nav>
 
-      <section class="section section-soft">
-        <div class="container listino-group">
-          <div class="listino-head">
-            <div class="listino-image">
-              <img src="assets/listino-corpo.jpg" alt="Trattamenti corpo" />
-            </div>
-          </div>
-          <h2>Trattamenti corpo</h2>
-
-          <ul class="price-list">
-            <li>
-              <span>Massaggio rilassante</span>
-              <span>€60</span>
-            </li>
-            <li>
-              <span>Massaggio drenante</span>
-              <span>€65</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container listino-note">
-          <p>
-            I prezzi indicati sono da considerarsi orientativi. Ogni trattamento
-            può essere personalizzato in base alle esigenze della persona.
-          </p>
-
-          <p>
-            Per informazioni, dubbi o richieste specifiche,
-            <a href="https://wa.me/393330000000">scrivimi su WhatsApp</a>.
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-info">
-          <p class="footer-brand">Sage Studio di Martina De Santis</p>
-          <p>Via xxx, 10 - 50127 Firenze</p>
-          <p>
-            <a href="mailto:info@sagestudio.it">info@sagestudio.it</a>
-          </p>
-        </div>
-
-        <div class="footer-links">
-          <a href="listino.html">Listino prezzi</a>
-          <a href="#">Privacy</a>
-          <a href="#" aria-label="Instagram">Instagram</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>
-          © 2026 Sage Studio, tutti i diritti riservati -
-          <small
-            >website by
-            <a href="https://www.codefromatoz.it">codefromatoz.it</a></small
-          >
+      <!-- ── HERO ── -->
+      <section
+        class="hero-section listino-hero"
+        style="
+          padding: 160px 48px 96px;
+          text-align: center;
+          background: oklch(95.5% 0.016 80);
+        "
+      >
+        <p
+          style="
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: oklch(57% 0.09 148);
+            margin-bottom: 18px;
+            font-weight: 400;
+            animation: fadeUp 0.8s ease 0.2s both;
+          "
+        >
+          Sage Studio
         </p>
-      </div>
-    </footer>
+        <h1
+          style="
+            font-family: &quot;Cormorant Garant&quot;, serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 68px;
+            line-height: 1.1;
+            color: oklch(20% 0.025 72);
+            margin-bottom: 24px;
+            animation: fadeUp 0.95s ease 0.35s both;
+          "
+        >
+          Listino prezzi
+        </h1>
+        <p
+          style="
+            font-size: 16px;
+            color: oklch(48% 0.02 72);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.85;
+            font-weight: 300;
+            animation: fadeUp 0.95s ease 0.5s both;
+          "
+        >
+          I trattamenti possono essere personalizzati in base alle tue esigenze.
+          Per dubbi o informazioni, scrivimi senza impegno.
+        </p>
+      </section>
+
+      <!-- ── TRATTAMENTI VISO ── -->
+      <section class="section-pad" style="padding: 100px 48px">
+        <div
+          class="col2"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            max-width: 1100px;
+            margin: 0 auto;
+          "
+        >
+          <div
+            class="reveal img-wrap"
+            style="
+              border-radius: 26px;
+              overflow: hidden;
+              box-shadow: 0 16px 56px rgba(80, 100, 80, 0.1);
+              aspect-ratio: 4/5;
+            "
+          >
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/listino-viso.jpg"
+              alt="Trattamenti viso"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+
+          <div style="padding-top: 16px">
+            <p
+              class="reveal"
+              style="
+                font-size: 11px;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: oklch(57% 0.09 148);
+                margin-bottom: 14px;
+                font-weight: 400;
+              "
+            >
+              Trattamenti viso
+            </p>
+            <h2
+              class="reveal d1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 40px;
+                line-height: 1.2;
+                color: oklch(20% 0.02 72);
+                margin-bottom: 36px;
+              "
+            >
+              Cura e luminosità per la tua pelle.
+            </h2>
+
+            <div
+              class="reveal d2"
+              style="border-top: 1px solid oklch(88% 0.01 75)"
+            >
+              <div
+                class="price-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 18px 14px;
+                  border-bottom: 1px solid oklch(90% 0.01 75);
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      font-size: 16px;
+                      color: oklch(24% 0.02 72);
+                      font-weight: 400;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Pulizia viso
+                  </p>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: oklch(56% 0.02 72);
+                      font-weight: 300;
+                    "
+                  >
+                    Detersione profonda e purificante
+                  </p>
+                </div>
+                <span
+                  style="
+                    font-family: &quot;Cormorant Garant&quot;, serif;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: oklch(57% 0.09 148);
+                    flex-shrink: 0;
+                    margin-left: 24px;
+                  "
+                  >€ 50</span
+                >
+              </div>
+              <div
+                class="price-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 18px 14px;
+                  border-bottom: 1px solid oklch(90% 0.01 75);
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      font-size: 16px;
+                      color: oklch(24% 0.02 72);
+                      font-weight: 400;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Trattamento idratante
+                  </p>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: oklch(56% 0.02 72);
+                      font-weight: 300;
+                    "
+                  >
+                    Nutrimento e ripristino dell'idratazione
+                  </p>
+                </div>
+                <span
+                  style="
+                    font-family: &quot;Cormorant Garant&quot;, serif;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: oklch(57% 0.09 148);
+                    flex-shrink: 0;
+                    margin-left: 24px;
+                  "
+                  >€ 60</span
+                >
+              </div>
+              <div
+                class="price-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 18px 14px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      font-size: 16px;
+                      color: oklch(24% 0.02 72);
+                      font-weight: 400;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Trattamento illuminante
+                  </p>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: oklch(56% 0.02 72);
+                      font-weight: 300;
+                    "
+                  >
+                    Uniforma il tono e dona luminosità
+                  </p>
+                </div>
+                <span
+                  style="
+                    font-family: &quot;Cormorant Garant&quot;, serif;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: oklch(57% 0.09 148);
+                    flex-shrink: 0;
+                    margin-left: 24px;
+                  "
+                  >€ 65</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TRATTAMENTI CORPO ── -->
+      <section class="section-pad" style="padding: 0 48px 100px">
+        <div
+          class="col2"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            max-width: 1100px;
+            margin: 0 auto;
+          "
+        >
+          <div style="padding-top: 16px">
+            <p
+              class="reveal"
+              style="
+                font-size: 11px;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: oklch(57% 0.09 148);
+                margin-bottom: 14px;
+                font-weight: 400;
+              "
+            >
+              Trattamenti corpo
+            </p>
+            <h2
+              class="reveal d1"
+              style="
+                font-family: &quot;Cormorant Garant&quot;, serif;
+                font-style: italic;
+                font-weight: 300;
+                font-size: 40px;
+                line-height: 1.2;
+                color: oklch(20% 0.02 72);
+                margin-bottom: 36px;
+              "
+            >
+              Rilassa il corpo, ritrova l'equilibrio.
+            </h2>
+
+            <div
+              class="reveal d2"
+              style="border-top: 1px solid oklch(88% 0.01 75)"
+            >
+              <div
+                class="price-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 18px 14px;
+                  border-bottom: 1px solid oklch(90% 0.01 75);
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      font-size: 16px;
+                      color: oklch(24% 0.02 72);
+                      font-weight: 400;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Massaggio rilassante
+                  </p>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: oklch(56% 0.02 72);
+                      font-weight: 300;
+                    "
+                  >
+                    Scioglie tensioni e distende i muscoli
+                  </p>
+                </div>
+                <span
+                  style="
+                    font-family: &quot;Cormorant Garant&quot;, serif;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: oklch(57% 0.09 148);
+                    flex-shrink: 0;
+                    margin-left: 24px;
+                  "
+                  >€ 60</span
+                >
+              </div>
+              <div
+                class="price-row"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 18px 14px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      font-size: 16px;
+                      color: oklch(24% 0.02 72);
+                      font-weight: 400;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Massaggio drenante
+                  </p>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: oklch(56% 0.02 72);
+                      font-weight: 300;
+                    "
+                  >
+                    Favorisce il drenaggio linfatico e la circolazione
+                  </p>
+                </div>
+                <span
+                  style="
+                    font-family: &quot;Cormorant Garant&quot;, serif;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: oklch(57% 0.09 148);
+                    flex-shrink: 0;
+                    margin-left: 24px;
+                  "
+                  >€ 65</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="reveal d1 img-wrap order-first"
+            style="
+              border-radius: 26px;
+              overflow: hidden;
+              box-shadow: 0 16px 56px rgba(80, 100, 80, 0.1);
+              aspect-ratio: 4/5;
+            "
+          >
+            <img
+              src="https://codefromatoz.github.io/sito-estetista/assets/listino-corpo.jpg"
+              alt="Trattamenti corpo"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── NOTA ── -->
+      <section class="section-pad" style="padding: 0 48px 100px">
+        <div
+          class="nota-box"
+          style="
+            max-width: 680px;
+            margin: 0 auto;
+            background: oklch(94% 0.022 148 / 0.22);
+            border-radius: 20px;
+            padding: 40px 48px;
+          "
+        >
+          <p
+            class="reveal"
+            style="
+              font-size: 14.5px;
+              color: oklch(40% 0.02 72);
+              line-height: 1.95;
+              font-weight: 300;
+              text-align: center;
+            "
+          >
+            I prezzi indicati sono da considerarsi orientativi. Ogni trattamento
+            può essere personalizzato in base alle esigenze della persona.<br /><br />
+            Per informazioni, dubbi o richieste specifiche,
+            <a
+              href="https://wa.me/393330000000"
+              style="
+                color: oklch(57% 0.09 148);
+                text-decoration: none;
+                font-weight: 400;
+                transition: opacity 0.2s;
+              "
+              onmouseover="this.style.opacity = '0.7'"
+              onmouseout="this.style.opacity = '1'"
+            >
+              scrivimi su WhatsApp </a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section
+        class="section-pad"
+        style="
+          padding: 100px 48px;
+          background: oklch(23% 0.025 72);
+          text-align: center;
+        "
+      >
+        <p
+          class="reveal"
+          style="
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: oklch(57% 0.09 148);
+            margin-bottom: 18px;
+            font-weight: 400;
+          "
+        >
+          Prenota
+        </p>
+        <h2
+          class="reveal d1"
+          style="
+            font-family: &quot;Cormorant Garant&quot;, serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 46px;
+            line-height: 1.2;
+            color: oklch(95% 0.01 78);
+            margin-bottom: 38px;
+            text-wrap: pretty;
+          "
+        >
+          Hai domande? Scrivimi senza impegno.
+        </h2>
+        <div
+          class="reveal d2"
+          style="
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <a
+            href="https://wa.me/393330000000"
+            class="btn-wa"
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 10px;
+              background: #25d366;
+              color: #fff;
+              text-decoration: none;
+              padding: 14px 30px;
+              border-radius: 40px;
+              font-size: 14px;
+              font-weight: 400;
+              letter-spacing: 0.04em;
+            "
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L0 24l6.342-1.508A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894c-1.89 0-3.659-.515-5.177-1.41l-.37-.22-3.768.896.908-3.68-.24-.384A9.877 9.877 0 012.105 12C2.105 6.575 6.575 2.106 12 2.106c5.424 0 9.895 4.47 9.895 9.894 0 5.424-4.47 9.894-9.895 9.894z"
+              />
+            </svg>
+            Scrivimi su WhatsApp
+          </a>
+          <a
+            href="index.html"
+            class="btn-rose-out"
+            style="
+              display: inline-flex;
+              align-items: center;
+              border: 1.5px solid oklch(79% 0.055 16);
+              color: oklch(75% 0.055 16);
+              text-decoration: none;
+              padding: 14px 30px;
+              border-radius: 40px;
+              font-size: 14px;
+              font-weight: 300;
+              letter-spacing: 0.04em;
+            "
+          >
+            ← Torna alla home
+          </a>
+        </div>
+      </section>
+
+      <!-- ── FOOTER ── -->
+      <footer
+        style="
+          padding: 26px 48px;
+          background: oklch(18% 0.02 72);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          flex-wrap: wrap;
+        "
+        class="footer-inner"
+      >
+        <p
+          style="
+            font-size: 12px;
+            color: oklch(44% 0.01 72);
+            letter-spacing: 0.04em;
+            font-weight: 300;
+          "
+        >
+          © 2026 Sage Studio — tutti i diritti riservati
+        </p>
+        <div style="display: flex; gap: 28px; align-items: center">
+          <a
+            href="index.html"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Home</a
+          >
+          <a
+            href="#"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Privacy</a
+          >
+          <a
+            href="#"
+            class="navlink footer-link"
+            style="
+              font-size: 11.5px;
+              color: oklch(52% 0.015 72);
+              text-decoration: none;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+            "
+            >Instagram</a
+          >
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // ── Nav scroll effect ──
+      const nav = document.getElementById("main-nav");
+      function applyNavStyle() {
+        const scrolled = window.scrollY > 70;
+        nav.style.background = scrolled
+          ? "oklch(97.5% 0.012 75 / 0.96)"
+          : "oklch(95.5% 0.016 80 / 0.96)";
+        nav.style.backdropFilter = "blur(18px)";
+        nav.style.webkitBackdropFilter = "blur(18px)";
+        nav.style.boxShadow = scrolled ? "0 1px 28px rgba(0,0,0,0.07)" : "none";
+        const inner = nav.querySelector(".nav-inner");
+        if (inner) {
+          inner.style.paddingTop = scrolled ? "14px" : "22px";
+          inner.style.paddingBottom = scrolled ? "14px" : "22px";
+        }
+      }
+      applyNavStyle();
+      window.addEventListener("scroll", applyNavStyle, { passive: true });
+
+      // ── Scroll reveal ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
   </body>
-
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    document.querySelectorAll(".fade-up").forEach((el) => {
-      observer.observe(el);
-    });
-  </script>
 </html>
